@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-4">
+        <h3>Login</h3>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {% if form.errors %}
+                <p class="text-error">There are errors in your form</p>
+            {% endif %}
+            <p>
+                {{ form.account_name.label() }}
+                {{ form.account_name(class= "error" if form.account_name.errors else "") }}
+                {% for error in form.account_name.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label() }}
+                {{ form.password(class= "error" if form.password.errors else "") }}
+                {% for error in form.password.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
+            </p>
+            {% for error in form.form_errors %}
+                <p class="text-error">{{ error }}</p>
+            {% endfor %}
+            <p>
+                {{ form.submit() }}
+            </p>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <p>Don't have an account yet? <a href="{{ url_for('auth.register') }}">Register</a> now</p>
+    </div>
+</div>
+{% endblock %}

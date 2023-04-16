@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/chota.min.css') }}" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <title>{% block title %}{% endblock title %} - {{ config.OT_SERVER_NAME }}</title>
+    </head>
+    <body>
+        <div id="top" class="container" role="document">
+            <header role="banner">
+                <h2>{{ config.OT_SERVER_NAME }}</h2>
+                <p>{{ config.OT_SERVER_DESCRIPTION }}</p>
+            </header>
+            <hr>
+            <nav class="nav">
+                <div class="nav-left is-left">
+                    <a href="{{ url_for('public.index') }}">Home</a>
+                    {% if g.account_id %}
+                        <a href="{{ url_for('auth.logout') }}">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}">Login</a>
+                    {% endif %}
+                </div>
+            </nav>
+            <hr>
+            <main role="main">
+                {% block content %}{% endblock content %}
+            </main>
+            <hr>
+            <footer role="footer">
+                <p>{{ config.OT_SERVER_NAME }}</p>
+                <p>
+                    Powered by
+                    <a href="https://github.com/amatria/pCarrot"
+                       target="_blank">
+                        pCarrot
+                    </a>
+                    <br>
+                    Copyright &copy; 2023
+                    <a href="https://amatria.dev"
+                       target="_blank">
+                       Iñaki Amatria Barral
+                    </a>
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>

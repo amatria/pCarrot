@@ -1,5 +1,6 @@
 flask
 pymysql
+markdown
 flask-wtf
 cryptography
 flask-caching

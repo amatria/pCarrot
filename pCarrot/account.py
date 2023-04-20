@@ -41,18 +41,19 @@ class ChangePasswordForm(FlaskForm):
     current_password = PasswordField(
         "Current password",
         validators=[
-            DataRequired("Enter your current password")
+            DataRequired("You must enter your current password")
         ],
         render_kw={"placeholder": "Type your current password"}
     )
     new_password = PasswordField(
         "New password",
         validators=[
-            DataRequired("Enter your new password"),
+            DataRequired("You must enter your new password"),
             Length(
                 min=8,
                 max=32,
-                message="Password must be between 8 and 32 characters long"
+                message="Your new password must be between 8 and 32 characters"
+                        " long"
             )
         ],
         render_kw={"placeholder": "Type your new password"}
@@ -60,8 +61,8 @@ class ChangePasswordForm(FlaskForm):
     confirm_password = PasswordField(
         "Confirm new password",
         validators=[
-            DataRequired("Confirm your new password"),
-            EqualTo("new_password", message="Passwords must match")
+            DataRequired("You must confirm your new password"),
+            EqualTo("new_password", message="Your new password does not match")
         ],
         render_kw={"placeholder": "Confirm your new password"}
     )

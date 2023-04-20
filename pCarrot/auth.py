@@ -52,14 +52,14 @@ class LoginForm(FlaskForm):
     account_name = StringField(
         "Account name",
         validators=[
-            DataRequired("Enter your account name")
+            DataRequired("You must enter your account name")
         ],
         render_kw={"placeholder": "Type your account name"}
     )
     password = PasswordField(
         "Password",
         validators=[
-            DataRequired("Enter your password")
+            DataRequired("You must enter your password")
         ],
         render_kw={"placeholder": "Type your password"}
     )
@@ -69,11 +69,12 @@ class RegisterForm(FlaskForm):
     account_name = StringField(
         "Account name",
         validators=[
-            DataRequired("Enter your account name"),
+            DataRequired("You must enter an account name"),
             Length(
                 min=4,
                 max=16,
-                message="Account name must be between 4 and 16 characters long"
+                message="Your account account name must be between 4 and 16"
+                        " characters long"
             )
         ],
         render_kw={"placeholder": "Type your account name"}
@@ -81,11 +82,11 @@ class RegisterForm(FlaskForm):
     password = PasswordField(
         "Password",
         validators=[
-            DataRequired("Enter your password"),
+            DataRequired("You must enter a password"),
             Length(
                 min=8,
                 max=32,
-                message="Password must be between 8 and 32 characters long"
+                message="Your password must be between 8 and 32 characters long"
             )
         ],
         render_kw={"placeholder": "Type your password"}
@@ -93,8 +94,8 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField(
         "Confirm password",
         validators=[
-            DataRequired("Confirm your password"),
-            EqualTo("password", message="Passwords must match")
+            DataRequired("You must confirm your password"),
+            EqualTo("password", message="Your passwords do not match")
         ],
         render_kw={"placeholder": "Confirm your password"}
     )

@@ -70,7 +70,9 @@ def create_app(test_config=None):
 
     from . import auth
     from . import public
+    from . import account
     app.register_blueprint(auth.bp)
     app.register_blueprint(public.bp)
+    app.register_blueprint(account.bp)
 
     return app

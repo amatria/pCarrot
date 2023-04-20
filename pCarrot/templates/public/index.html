@@ -5,7 +5,16 @@
 {% block content %}
 <div class="row">
     <div class="col">
-        <h3>Latest news</h3>
+        <h3>Home</h3>
+        <p>
+            This is the home page of {{ config.OT_SERVER_NAME }}. Here you can
+            find the latest news and general information about the server
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h4>Latest news</h4>
         {% if error %}
             <p>
                 There was an error while retrieving the latest news, try again
@@ -16,12 +25,14 @@
                 <p>There are no news to display</p>
             {% else %}
                 {% for news in latest_news %}
-                    <h4>{{ news.title }}</h4>
+                    <h5>{{ news.title }}</h5>
                     {{ news.body | safe }}
                     <p>
-                        Posted on
-                        <a href="#!">{{ news.date.strftime('%d/%m/%Y') }}</a>
-                        at <a href="#!">{{ news.date.strftime('%H:%M') }}</a>
+                        <cite>
+                            Posted on
+                            <a href="#!">{{ news.date.strftime('%d/%m/%Y') }}</a>
+                            at <a href="#!">{{ news.date.strftime('%H:%M') }}</a>
+                        </cite>
                     </p>
                 {% endfor %}
             {% endif %}

@@ -52,24 +52,14 @@ class LoginForm(FlaskForm):
     account_name = StringField(
         "Account name",
         validators=[
-            DataRequired("Enter your account name"),
-            Length(
-                min=4,
-                max=16,
-                message="Account name must be between 4 and 16 characters long"
-            )
+            DataRequired("Enter your account name")
         ],
         render_kw={"placeholder": "Type your account name"}
     )
     password = PasswordField(
         "Password",
         validators=[
-            DataRequired("Enter your password"),
-            Length(
-                min=8,
-                max=32,
-                message="Password must be between 8 and 32 characters long"
-            )
+            DataRequired("Enter your password")
         ],
         render_kw={"placeholder": "Type your password"}
     )
@@ -104,11 +94,6 @@ class RegisterForm(FlaskForm):
         "Confirm password",
         validators=[
             DataRequired("Confirm your password"),
-            Length(
-                min=8,
-                max=32,
-                message="Password must be between 8 and 32 characters long"
-            ),
             EqualTo("password", message="Passwords must match")
         ],
         render_kw={"placeholder": "Confirm your password"}
@@ -148,7 +133,7 @@ def login():
             return render_template("auth/login.html", form=form)
         session["account_id"] = account_id
 
-        return redirect(url_for("public.index"))
+        return redirect(url_for("account.index"))
     return render_template("auth/login.html", form=form)
 
 @bp.route("/register", methods=("GET", "POST"))
@@ -173,4 +158,5 @@ def register():
 @bp.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("auth.login"))
+    g.account_id = None
+    return render_template("auth/logout_success.html")

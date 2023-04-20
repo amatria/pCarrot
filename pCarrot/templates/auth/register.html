@@ -4,29 +4,34 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-4">
+    <div class="col">
         <h3>Register</h3>
+        <p>Register a new account to login into the server</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             {% if form.errors %}
                 <p class="text-error">There are errors in your form</p>
             {% endif %}
             <p>
-                {{ form.account_name.label() }}
+                {{ form.account_name.label(class= "text-error" if form.account_name.errors else "") }}
                 {{ form.account_name(class= "error" if form.account_name.errors else "") }}
                 {% for error in form.account_name.errors %}
                     <p class="text-error">{{ error }}</p>
                 {% endfor %}
             </p>
             <p>
-                {{ form.password.label() }}
+                {{ form.password.label(class= "text-error" if form.password.errors else "") }}
                 {{ form.password(class= "error" if form.password.errors else "") }}
                 {% for error in form.password.errors %}
                     <p class="text-error">{{ error }}</p>
                 {% endfor %}
             </p>
             <p>
-                {{ form.confirm_password.label() }}
+                {{ form.confirm_password.label(class= "text-error" if form.confirm_password.errors else "") }}
                 {{ form.confirm_password(class= "error" if form.confirm_password.errors else "") }}
                 {% for error in form.confirm_password.errors %}
                     <p class="text-error">{{ error }}</p>

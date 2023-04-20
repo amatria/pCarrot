@@ -32,7 +32,6 @@ from .model import get_latest_news
 bp = Blueprint("public", __name__)
 
 @bp.route("/")
-@bp.route("/index")
 def index():
     try:
         latest_news = get_latest_news(current_app.config["OT_NUM_LATEST_NEWS"])

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h3>Account</h3>
+        <p>
+            This is your account page, here you can change your password and
+            manage your characters
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <h4>Characters</h4>
+        <p>There are no characters associated with this account</p>
+        <!--<p>
+            <table style="text-align: left;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Level</th>
+                        <th>Vocation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#">Character 1</a></td>
+                        <td>247</td>
+                        <td>Master Sorcerer</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Character 2</a></td>
+                        <td>100</td>
+                        <td>Elite Knight</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Character 3</a></td>
+                        <td>8</td>
+                        <td>Sorcerer</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Character 4</a></td>
+                        <td>8</td>
+                        <td>Paladin</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr></tr>
+                </tfoot>
+            </table>
+        </p>-->
+        <p>
+            <button class="button primary">Create</button>
+        </p>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-4">
+        <h4>Change password</h4>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {% if form.errors %}
+                <p class="text-error">There are errors in your form</p>
+            {% endif %}
+            <p>
+                {{ form.current_password.label(class= "text-error" if form.current_password.errors else "") }}
+                {{ form.current_password(class= "error" if form.current_password.errors else "") }}
+                {% for error in form.current_password.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.new_password.label(class= "text-error" if form.new_password.errors else "") }}
+                {{ form.new_password(class= "error" if form.new_password.errors else "") }}
+                {% for error in form.new_password.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.confirm_password.label(class= "text-error" if form.confirm_password.errors else "") }}
+                {{ form.confirm_password(class= "error" if form.confirm_password.errors else "") }}
+                {% for error in form.confirm_password.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.submit() }}
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

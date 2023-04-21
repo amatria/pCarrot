@@ -26,11 +26,9 @@
                     <h5>{{ news.title }}</h5>
                     {{ news.body | safe }}
                     <p>
-                        <cite>
-                            Posted on
-                            <a href="#!">{{ news.date.strftime('%d/%m/%Y') }}</a>
-                            at <a href="#!">{{ news.date.strftime('%H:%M') }}</a>
-                        </cite>
+                        Posted on
+                        <a href="#!">{{ news.date.strftime('%d/%m/%Y') }}</a>
+                        at <a href="#!">{{ news.date.strftime('%H:%M') }}</a>
                     </p>
                 {% endfor %}
             {% endif %}

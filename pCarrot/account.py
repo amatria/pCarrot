@@ -23,6 +23,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import hashlib
+
+from flask import g
 from flask import Blueprint
 from flask import render_template
 
@@ -36,6 +39,9 @@ from wtforms.validators import EqualTo
 from wtforms.validators import DataRequired
 
 from .auth import login_required
+
+from .model import change_account_password
+from .model import AccountChangePasswordError
 
 class ChangePasswordForm(FlaskForm):
     current_password = PasswordField(
@@ -75,5 +81,32 @@ bp = Blueprint("account", __name__)
 def index():
     form = ChangePasswordForm()
     if form.validate_on_submit():
-        return "OK"
+        current_password = hashlib.sha1(
+            form.current_password.data.encode("utf-8")
+        ).hexdigest()
+        new_password = hashlib.sha1(
+            form.new_password.data.encode("utf-8")
+        ).hexdigest()
+
+        if current_password == new_password:
+            form.new_password.errors.append(
+                "Your new password must be different from your current password"
+            )
+            return render_template("account/index.html", form=form)
+
+        try:
+            change_account_password(
+                g.account_id,
+                current_password,
+                new_password
+            )
+        except AccountChangePasswordError as e:
+            form.current_password.errors.append(e)
+            return render_template("account/index.html", form=form)
+        except:
+            form.form_errors.append("Oops! Something went wrong, try again")
+            return render_template("account/index.html", form=form)
+
+        return render_template("account/change_password_success.html")
+
     return render_template("account/index.html", form=form)

@@ -31,6 +31,7 @@ from .cache import cache
 
 class AccountNotFoundError(Exception): ...
 class AccountNameInUseError(Exception): ...
+class AccountChangePasswordError(Exception): ...
 
 @cache.memoize()
 def get_latest_news(num_latest_news):
@@ -56,6 +57,21 @@ def register_new_account(account_name, password):
             "INSERT INTO `accounts` (`name`, `password`, `creation`)"
             " VALUES (%s, %s, %s)",
             (account_name, password, int(time.time()))
+        )
+    db.commit()
+
+def change_account_password(account_id, old_password, new_password):
+    db = get_db()
+    with db.cursor() as cursor:
+        cursor.execute(
+            "SELECT * FROM `accounts` WHERE `id` = %s AND `password` = %s",
+            (account_id, old_password)
+        )
+        if not cursor.fetchone():
+            raise AccountChangePasswordError("Invalid current password")
+        cursor.execute(
+            "UPDATE `accounts` SET `password` = %s WHERE `id` = %s",
+            (new_password, account_id)
         )
     db.commit()
 

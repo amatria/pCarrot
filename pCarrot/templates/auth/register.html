@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col">
         <h3>Register</h3>
-        <p>Register a new account to login into the server</p>
+        <p>Register a new account to log in to the server</p>
     </div>
 </div>
 <div class="row">
@@ -46,7 +46,10 @@
 </div>
 <div class="row">
     <div class="col-4">
-        <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login</a> here</p>
+        <p>
+            Already have an account?
+            <a href="{{ url_for('auth.login') }}">Log in</a> here
+        </p>
     </div>
 </div>
 {% endblock %}

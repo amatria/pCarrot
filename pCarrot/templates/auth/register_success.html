@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Register{% endblock %}
-
 {% block content %}
 <div class="row">
     <div class="col">
         <h3>Congratulations!</h3>
         <p>Your account has been created successfully</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>
+            Click <a href="{{ url_for('auth.login') }}">here</a> to login into
+            your account
+        </p>
     </div>
 </div>
 {% endblock %}
